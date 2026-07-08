@@ -1,0 +1,90 @@
+[
+  {
+    "prompt": "Nesse caso, consegues verificar se já estás apto pra isso?",
+    "answer": "Claro! Mas me conta: **apta pra fazer o quê, especificamente?** \n\nSe for algo que dependa de ferramentas, acesso a sistemas ou contexto da nossa conversa, me dá mais detalhes que eu verifico na hora se consigo te ajudar. 😊",
+    "decision": {
+      "kind": "remote",
+      "modelName": "Remote Reasoning LLM",
+      "confidence": 84,
+      "estimatedLatencyMs": 2600,
+      "estimatedCostUsd": 0.0025,
+      "rationale": "Fallback remoto acionado por baixa confiança do modelo local.",
+      "signals": [
+        "Baixa confiança local"
+      ]
+    },
+    "timestampIso": "2026-07-08T23:14:19.192468+00:00",
+    "usedFallbackRemote": true
+  },
+  {
+    "prompt": "A ideia é criar um assitente virtual para outfit utilizando IA para melhor resposta e desempenho, já na no desafio, é conseguir equilibrar quando utilizar token, memória ou fallback, com objectivo de minizar os custos à uma boa qualidade e velocidade de resposta.",
+    "answer": "Ótimo desafio! Para um assistente de *outfits*, a chave é **não chamar o LLM para tudo**. Aqui vai uma arquitetura prática para equilibrar custo, qualidade e velocidade:\n\n## 1. Camadas de resposta (do mais barato/rápido ao mais caro)\n\n| Camada | Quando usar | Exemplo |\n|--------|-------------|---------|\n| **Cache / Regras** | Perguntas repetitivas ou simples | \"O que combina com calça jeans?\" → resposta pré-montada |\n| **Memória do usuário** | Preferências conhecidas | \"Sempre me sugira looks sem salto\" |\n| **LLM enxuto** | Personalização leve | Montar outfit com peças do guarda-roupa do usuário |\n| **LLM completo** | Casos complexos | Evento específico, restrições de clima, estilo, orçamento |\n\n## 2. Otimize tokens\n\n- **Prompt enxuto**: envie só o necessário (peças disponíveis, ocasião, preferências). Evite histórico longo.\n- **Saída estruturada**: peça JSON com `topo`, `calça`, `calçado`, `acessórios`. Mais rápido e fácil de validar.\n- **Resumo de contexto**: em vez de enviar toda a conversa, mantenha um resumo de 2–3 linhas com o que importa.\n\n## 3. Memória inteligente\n\n- **Curto prazo**: contexto da conversa atual (resumido).\n- **Longo prazo**: estilo, cores favoritas, peças que possui, restrições (ex: alergia a tecidos, dress code do trabalho).\n- **Só atualize a memória quando necessário**: não grave cada mensagem. Use o LLM para extrair fatos relevantes a cada 5–10 interações.\n\n## 4. Fallback bem definido\n\n- Se o LLM demorar ou falhar → resposta baseada em regras: \"Com base no seu estilo, sugiro uma combinação básica segura.\"\n- Se a pergunta for muito vaga → peça esclarecimento antes de gastar tokens.\n- Se o usuário repetir a mesma pergunta → responda do cache.\n\n## 5. Fluxo recomendado\n\n```\n1. Usuário pergunta\n2. Busca resposta em cache/regras\n3. Se não tiver → consulta memória do usuário\n4. Monta prompt enxuto com contexto essencial\n5. Chama LLM só se precisar de criatividade/personalização\n6. Valida a resposta e, se útil, atualiza memória\n```\n\n## Dica de custo\n\nComece com um modelo mais barato (como GPT-4o-mini / Claude Haiku) para 80% das interações. Use o modelo maior só para recomendações complexas ou quando o usuário pedir algo sofisticado.\n\nQuer que eu monte um exemplo de prompt otimizado para esse assistente de outfits?",
+    "decision": {
+      "kind": "remote",
+      "modelName": "Remote Reasoning LLM",
+      "confidence": 84,
+      "estimatedLatencyMs": 2600,
+      "estimatedCostUsd": 0.0025,
+      "rationale": "O pedido pede síntese, comparação ou raciocínio mais profundo.",
+      "signals": [
+        "Pedido de raciocínio avançado",
+        "Texto longo",
+        "Sem imagem e contexto alargado"
+      ]
+    },
+    "timestampIso": "2026-07-08T23:13:33.160946+00:00",
+    "usedFallbackRemote": false
+  },
+  {
+    "prompt": "estou usando o kimi-2kp6, estou participando do hackthon da amd e você é o meu projecto para submeter.",
+    "answer": "Legal! Conta comigo para te ajudar a montar um projeto forte para o hackathon da AMD. 🚀\n\nPara eu te dar o melhor suporte, me conta:\n\n1. **Qual é a ideia do projeto?** (AI/ML, GPU acceleration, ROCm, gaming, computação de alto desempenho, etc.)\n2. **Qual é o desafio/pista da AMD no hackathon?**\n3. **Você precisa de código, documentação, pitch/slide, ou tudo isso?**\n4. **Qual stack você está usando?** (PyTorch, ONNX, HIP, OpenCL, etc.)\n\nSe quiser, posso começar te ajudando a estruturar o README, arquitetura do sistema, e um demo script. Só mandar os detalhes! 💪",
+    "decision": {
+      "kind": "remote",
+      "modelName": "Remote Reasoning LLM",
+      "confidence": 84,
+      "estimatedLatencyMs": 2600,
+      "estimatedCostUsd": 0.0025,
+      "rationale": "Fallback remoto acionado por baixa confiança do modelo local.",
+      "signals": [
+        "Baixa confiança local"
+      ]
+    },
+    "timestampIso": "2026-07-08T23:11:45.104136+00:00",
+    "usedFallbackRemote": true
+  },
+  {
+    "prompt": "COnsegues me dizer se essa resposta custou quanto de token?",
+    "answer": "Não consigo dizer o custo exato em tokens desta resposta em tempo real — não tenho acesso ao contador de tokens da conversa.\n\nComo referência, em português costuma haver cerca de **1 token a cada 3–4 caracteres** (palavras mais longas ou com acentos podem gastar mais). Se quiseres contar com precisão, podes copiar a resposta para uma ferramenta como o **OpenAI Tokenizer** ou outro contador compatível com o modelo usado.\n\nSe me disseres qual modelo estás a usar, posso dar uma estimativa mais aproximada.",
+    "decision": {
+      "kind": "remote",
+      "modelName": "Remote Reasoning LLM",
+      "confidence": 84,
+      "estimatedLatencyMs": 2600,
+      "estimatedCostUsd": 0.0025,
+      "rationale": "Fallback remoto acionado por baixa confiança do modelo local.",
+      "signals": [
+        "Baixa confiança local"
+      ]
+    },
+    "timestampIso": "2026-07-08T23:10:44.006702+00:00",
+    "usedFallbackRemote": true
+  },
+  {
+    "prompt": "Chat, me descreva essa imagem.",
+    "answer": "Três jovens estão lado a lado em um fundo azul claro com sombras geométricas. Todos usam camisetas cinza-claras com a estampa \"WAVE CLEAN\" em vermelho e preto. O do meio usa óculos de sol com lentes amareladas. Os três usam calças escuras e têm uma expressão amigável. No canto superior esquerdo, há uma marca d'água \"magic Studio\". Parece uma foto promocional ou de moda, com iluminação de estúdio.",
+    "decision": {
+      "kind": "remote",
+      "modelName": "Remote Reasoning LLM",
+      "confidence": 92,
+      "estimatedLatencyMs": 2600,
+      "estimatedCostUsd": 0.0025,
+      "rationale": "Fallback remoto acionado porque o endpoint local não está configurado.",
+      "signals": [
+        "Imagem anexada",
+        "Endpoint local indisponível"
+      ]
+    },
+    "timestampIso": "2026-07-08T23:09:55.121246+00:00",
+    "usedFallbackRemote": true
+  }
+]

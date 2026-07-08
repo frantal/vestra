@@ -1,0 +1,13 @@
+# Feature modules — VESTRA (feature-first Clean Architecture)
+#
+# Each feature follows a layered structure:
+#   <feature>/
+#     presentation/    UI: screens, widgets, controllers (Riverpod)
+#     application/     Use cases / application services
+#     domain/          Entities, value objects, repository interfaces
+#     infrastructure/  Repository implementations, data sources, DTOs
+#
+# Planned features (per PRD):
+#   authentication, onboarding, dashboard, wardrobe, camera, ai,
+#   recommendations, history, statistics, notifications, profile,
+#   settings, premium
