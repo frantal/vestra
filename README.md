@@ -22,9 +22,11 @@ Default remote model is `accounts/fireworks/models/kimi-k2p7-code` (vision-capab
 flutter run -d web-server --web-hostname 127.0.0.1 --web-port 8080
 ```
 
-Open `http://127.0.0.1:8080`, go to **Assistente IA**, enable **Usar backend FastAPI**, and set:
+Open `http://127.0.0.1:8080`, go to **Assistente IA**, enable **Usar backend FastAPI**, and set (for local backend dev):
 
 `http://127.0.0.1:8000`
+
+In production/demo, the app defaults to `https://vestraapi.frantalcompany.com`.
 
 For vision requests, you can now select an image directly from your device in the AI screen (URL remains optional).
 

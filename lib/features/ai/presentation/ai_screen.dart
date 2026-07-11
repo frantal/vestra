@@ -28,6 +28,9 @@ class AiScreen extends ConsumerStatefulWidget {
 }
 
 class _AiScreenState extends ConsumerState<AiScreen> {
+  static const String _defaultBackendUrl = 'https://vestraapi.frantalcompany.com';
+  static const String _legacyLocalBackendUrl = 'http://127.0.0.1:8000';
+
   final TextEditingController _prompt = TextEditingController();
   final TextEditingController _imageUrl = TextEditingController();
   late final TextEditingController _backendUrl;
@@ -82,9 +85,16 @@ class _AiScreenState extends ConsumerState<AiScreen> {
   void initState() {
     super.initState();
     final prefs = ref.read(sharedPreferencesProvider);
+    final savedBackendUrl = prefs.getString(PrefKeys.hybridBackendUrl);
+    final initialBackendUrl = _resolveInitialBackendUrl(savedBackendUrl);
     _backendUrl = TextEditingController(
-      text: prefs.getString(PrefKeys.hybridBackendUrl) ?? 'http://127.0.0.1:8000',
+      text: initialBackendUrl,
     );
+    if (savedBackendUrl == null ||
+        savedBackendUrl.trim().isEmpty ||
+        savedBackendUrl.trim() == _legacyLocalBackendUrl) {
+      unawaited(_persistBackendSettings(backendUrl: initialBackendUrl));
+    }
     _useBackend = prefs.containsKey(PrefKeys.hybridUseBackend)
         ? (prefs.getBool(PrefKeys.hybridUseBackend) ?? false)
         : true;
@@ -165,6 +175,14 @@ class _AiScreenState extends ConsumerState<AiScreen> {
   }
 
   List<_ChatTurn> get _activeTurns => _activeSession?.turns ?? const [];
+
+  String _resolveInitialBackendUrl(String? savedBackendUrl) {
+    final trimmed = savedBackendUrl?.trim() ?? '';
+    if (trimmed.isEmpty || trimmed == _legacyLocalBackendUrl) {
+      return _defaultBackendUrl;
+    }
+    return trimmed;
+  }
 
   Future<void> _persistBackendSettings({
     bool? useBackend,
@@ -1210,7 +1228,7 @@ class _AiScreenState extends ConsumerState<AiScreen> {
         if (_useBackend) ...[
           AppTextField(
             label: 'Backend URL',
-            hint: 'http://127.0.0.1:8000',
+            hint: _defaultBackendUrl,
             controller: _backendUrl,
             icon: Icons.settings_ethernet_rounded,
             onChanged: (value) {
