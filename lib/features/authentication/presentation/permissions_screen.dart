@@ -165,7 +165,7 @@ class _PermissionsScreenState extends State<PermissionsScreen> {
                 padding: const EdgeInsets.all(AppSpacing.xl),
                 child: GlowButton(
                   label: 'Continuar',
-                  onPressed: () => context.go(AppRoutes.home),
+                  onPressed: () => context.go(AppRoutes.ai),
                 ),
               ),
             ],
